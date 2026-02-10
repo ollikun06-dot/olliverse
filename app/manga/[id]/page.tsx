@@ -76,6 +76,7 @@ export default function MangaDetailPage({
                     src={imageUrl || "/placeholder.svg"}
                     alt=""
                     className="h-full w-full scale-110 object-cover opacity-10 blur-3xl"
+                    loading="eager"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-card via-card/90 to-card" />
@@ -96,7 +97,11 @@ export default function MangaDetailPage({
                         src={imageUrl || "/placeholder.svg"}
                         alt={manga.title}
                         className="aspect-[3/4] w-full object-cover"
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="sync"
                         referrerPolicy="no-referrer"
+                        style={{ imageRendering: "auto" }}
                       />
                     ) : (
                       <div className="flex aspect-[3/4] w-full items-center justify-center bg-secondary">

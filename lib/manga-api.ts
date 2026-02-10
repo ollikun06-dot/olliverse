@@ -44,8 +44,12 @@ export interface ChapterPage {
 
 const MANGADEX = "https://api.mangadex.org"
 
-function getCoverUrl(mangaId: string, fileName: string, size: "256" | "512" = "512"): string {
-  return `https://uploads.mangadex.org/covers/${mangaId}/${fileName}.${size}.jpg`
+function getCoverUrl(mangaId: string, fileName: string, size?: "256" | "512"): string {
+  if (size) {
+    return `https://uploads.mangadex.org/covers/${mangaId}/${fileName}.${size}.jpg`
+  }
+  // Original full-resolution cover
+  return `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`
 }
 
 function getTitle(attributes: Record<string, unknown>): string {

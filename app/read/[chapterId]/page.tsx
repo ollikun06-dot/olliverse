@@ -53,7 +53,7 @@ export default function ReaderPage({
         animate={{ y: 0 }}
         className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl"
       >
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <Link
             href="/"
             className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -82,7 +82,7 @@ export default function ReaderPage({
         ) : null}
       </motion.header>
 
-      <main className="mx-auto max-w-4xl px-0 pb-16 pt-16 sm:px-4">
+      <main className="mx-auto max-w-5xl px-0 pb-16 pt-16 sm:px-4">
         {isLoading && (
           <div className="flex items-center justify-center py-32">
             <div className="flex flex-col items-center gap-3">
@@ -121,9 +121,12 @@ export default function ReaderPage({
                 <img
                   src={proxyImage(page.img) || "/placeholder.svg"}
                   alt={`Page ${page.page}`}
-                  className="w-full"
+                  className="w-full h-auto"
                   loading={index < 3 ? "eager" : "lazy"}
+                  decoding={index < 3 ? "sync" : "async"}
+                  fetchPriority={index < 3 ? "high" : "auto"}
                   referrerPolicy="no-referrer"
+                  style={{ imageRendering: "auto" }}
                 />
               </motion.div>
             ))}

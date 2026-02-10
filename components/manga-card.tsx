@@ -70,7 +70,9 @@ export function MangaCard({ manga, index = 0 }: MangaCardProps) {
                   alt={manga.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
+                  style={{ imageRendering: "auto" }}
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-secondary">

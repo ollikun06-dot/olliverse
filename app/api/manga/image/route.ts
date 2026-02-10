@@ -11,12 +11,16 @@ export async function GET(request: NextRequest) {
   try {
     const res = await fetch(url, {
       headers: {
-        "Referer": "https://mangadex.org/",
+        Referer: "https://mangadex.org/",
+        Accept: "image/webp,image/avif,image/png,image/jpeg,*/*",
       },
     })
 
     if (!res.ok) {
-      return NextResponse.json({ error: "Image fetch failed" }, { status: res.status })
+      return NextResponse.json(
+        { error: "Image fetch failed" },
+        { status: res.status }
+      )
     }
 
     const contentType = res.headers.get("content-type") || "image/jpeg"
@@ -25,10 +29,14 @@ export async function GET(request: NextRequest) {
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": contentType,
-        "Cache-Control": "public, max-age=86400, s-maxage=86400",
+        "Cache-Control": "public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400",
+        "Content-Length": String(buffer.byteLength),
       },
     })
   } catch {
-    return NextResponse.json({ error: "Failed to fetch image" }, { status: 500 })
+    return NextResponse.json(
+      { error: "Failed to fetch image" },
+      { status: 500 }
+    )
   }
 }
