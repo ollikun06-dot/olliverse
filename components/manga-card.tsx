@@ -26,8 +26,8 @@ export function MangaCard({ manga, index = 0 }: MangaCardProps) {
     const centerY = rect.top + rect.height / 2
     const mouseX = e.clientX - centerX
     const mouseY = e.clientY - centerY
-    setRotateX(-mouseY / 8)
-    setRotateY(mouseX / 8)
+    setRotateX(-mouseY / 12)
+    setRotateY(mouseX / 12)
   }
 
   function handleMouseLeave() {
@@ -40,9 +40,10 @@ export function MangaCard({ manga, index = 0 }: MangaCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04, duration: 0.5, ease: "easeOut" }}
+      transition={{ delay: index * 0.03, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="gpu-accelerated"
     >
       <Link href={`/manga/${manga.id}`} className="block">
         <div
@@ -56,9 +57,9 @@ export function MangaCard({ manga, index = 0 }: MangaCardProps) {
             animate={{
               rotateX,
               rotateY,
-              scale: isHovered ? 1.05 : 1,
+              scale: isHovered ? 1.03 : 1,
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: "spring", stiffness: 200, damping: 25, mass: 0.8 }}
             style={{ transformStyle: "preserve-3d" }}
             className="relative overflow-hidden rounded-2xl border border-border bg-card transition-colors group-hover:border-primary/30"
           >
@@ -68,7 +69,7 @@ export function MangaCard({ manga, index = 0 }: MangaCardProps) {
                 <img
                   src={imageUrl || "/placeholder.svg"}
                   alt={manga.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"

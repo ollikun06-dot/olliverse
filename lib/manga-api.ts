@@ -223,6 +223,42 @@ export async function getMangaInfo(id: string): Promise<MangaInfo> {
   }
 }
 
+// ---- Category-specific fetchers ----
+
+export async function getMangaByCategory(
+  category: "manga" | "manhwa" | "nsfw",
+  limit = 20,
+  offset = 0
+): Promise<MangaSearchResponse> {
+  const params = new URLSearchParams()
+  params.append("limit", String(limit))
+  params.append("offset", String(offset))
+  params.append("includes[]", "cover_art")
+  params.append("order[followedCount]", "desc")
+
+  if (category === "manga") {
+    params.append("originalLanguage[]", "ja")
+    params.append("contentRating[]", "safe")
+    params.append("contentRating[]", "suggestive")
+  } else if (category === "manhwa") {
+    params.append("originalLanguage[]", "ko")
+    params.append("contentRating[]", "safe")
+    params.append("contentRating[]", "suggestive")
+  } else if (category === "nsfw") {
+    params.append("contentRating[]", "erotica")
+    params.append("contentRating[]", "pornographic")
+  }
+
+  const res = await fetch(`${MANGADEX}/manga?${params}`, { next: { revalidate: 60 } })
+  if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
+  const json = await res.json()
+  return {
+    results: json.data.map(transformMangaData),
+    total: json.total,
+    hasNextPage: offset + limit < json.total,
+  }
+}
+
 export async function getChapterPages(chapterId: string): Promise<ChapterPage[]> {
   const res = await fetch(`${MANGADEX}/at-home/server/${chapterId}`, { next: { revalidate: 300 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
@@ -264,3 +300,6 @@ export const getRecentUrl = (page = 1) => `/api/manga/recent?page=${page}`
 export const getMangaInfoUrl = (id: string) => `/api/manga/info?id=${encodeURIComponent(id)}`
 
 export const getChapterPagesUrl = (chapterId: string) => `/api/manga/read?id=${encodeURIComponent(chapterId)}`
+
+export const getCategoryUrl = (category: "manga" | "manhwa" | "nsfw", page = 1) =>
+  `/api/manga/category?category=${category}&page=${page}`

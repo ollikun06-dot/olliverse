@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Menu, X, Flame, Sparkles, Clock, Gamepad2, Zap } from "lucide-react"
+import { Search, Menu, X, Flame, Sparkles, Gamepad2, Zap, BookOpen, Globe } from "lucide-react"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -17,8 +17,10 @@ export function Navbar() {
 
   const links = [
     { href: "/", label: "Hub", icon: Gamepad2 },
-    { href: "/popular", label: "Top Picks", icon: Flame },
-    { href: "/latest", label: "New Drops", icon: Sparkles },
+    { href: "/category/manga", label: "Manga", icon: BookOpen },
+    { href: "/category/manhwa", label: "Manhwa", icon: Globe },
+    { href: "/category/nsfw", label: "NSFW", icon: Flame },
+    { href: "/popular", label: "Top Picks", icon: Sparkles },
   ]
 
   function handleSearch(e: React.FormEvent) {
@@ -102,8 +104,8 @@ export function Navbar() {
           </AnimatePresence>
 
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setSearchOpen(!searchOpen)}
             className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary ring-1 ring-border text-muted-foreground transition-colors hover:text-primary hover:ring-primary/30"
             aria-label="Toggle search"
@@ -112,7 +114,7 @@ export function Navbar() {
           </motion.button>
 
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex h-9 w-9 items-center justify-center rounded-xl bg-secondary ring-1 ring-border text-muted-foreground md:hidden"
             aria-label="Toggle menu"
@@ -129,7 +131,7 @@ export function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="relative overflow-hidden border-b border-primary/10 glass md:hidden"
           >
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">

@@ -86,9 +86,9 @@ export default function MangaDetailPage({
               <div className="relative flex flex-col gap-8 p-6 md:flex-row md:p-10">
                 {/* Cover image */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30, rotateY: -15 }}
+                  initial={{ opacity: 0, y: 16, rotateY: -8 }}
                   animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className="flex-shrink-0 perspective-1000"
                 >
                   <div className="relative mx-auto w-48 overflow-hidden rounded-xl border border-border shadow-2xl shadow-primary/10 md:w-56">
@@ -115,9 +115,9 @@ export default function MangaDetailPage({
 
                 {/* Info */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="flex-1"
                 >
                   <h1 className="text-balance text-3xl font-extrabold tracking-tight text-foreground lg:text-4xl">

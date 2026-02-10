@@ -114,8 +114,8 @@ export default function ReaderPage({
                 key={page.page}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "200px" }}
-                transition={{ duration: 0.4 }}
+                viewport={{ once: true, margin: "300px" }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="relative"
               >
                 <img

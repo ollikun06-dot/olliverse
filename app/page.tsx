@@ -7,6 +7,7 @@ import { MangaGrid } from "@/components/manga-grid"
 import { MangaGridSkeleton } from "@/components/manga-skeleton"
 import { fetcher, getPopularUrl, getLatestUrl, getRecentUrl } from "@/lib/manga-api"
 import type { MangaSearchResponse } from "@/lib/manga-api"
+import { CategorySection } from "@/components/category-section"
 import { motion } from "framer-motion"
 
 export default function HomePage() {
@@ -29,12 +30,23 @@ export default function HomePage() {
 
       <HeroSection />
 
+      {/* Category Browse Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto max-w-7xl px-4 py-12 lg:px-8"
+      >
+        <CategorySection />
+      </motion.div>
+
       {/* Popular Section */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-7xl px-4 py-12 lg:px-8"
       >
         {loadingPopular ? (
@@ -55,10 +67,10 @@ export default function HomePage() {
 
       {/* Latest Updates Section */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-7xl px-4 py-12 lg:px-8"
       >
         {loadingLatest ? (
@@ -79,10 +91,10 @@ export default function HomePage() {
 
       {/* Recently Added Section */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-7xl px-4 py-12 lg:px-8"
       >
         {loadingRecent ? (

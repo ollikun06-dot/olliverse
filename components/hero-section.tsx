@@ -34,41 +34,41 @@ export function HeroSection() {
         {/* Main cyan glow */}
         <motion.div
           animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.12, 0.22, 0.12],
+            scale: [1, 1.15, 1],
+            opacity: [0.1, 0.18, 0.1],
           }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/25 blur-[150px]"
+          transition={{ duration: 8, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[150px] gpu-accelerated"
         />
         {/* Pink accent glow */}
         <motion.div
           animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.08, 0.15, 0.08],
+            scale: [1.1, 1, 1.1],
+            opacity: [0.06, 0.12, 0.06],
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-1/4 top-2/3 h-[500px] w-[500px] rounded-full bg-accent/20 blur-[120px]"
+          transition={{ duration: 10, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          className="absolute right-1/4 top-2/3 h-[500px] w-[500px] rounded-full bg-accent/15 blur-[120px] gpu-accelerated"
         />
 
         {/* Floating RPG icons */}
         <motion.div
-          animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-[10%] top-[25%] flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/10 bg-primary/5"
+          animate={{ y: [0, -10, 0], rotate: [0, 3, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          className="absolute left-[10%] top-[25%] flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/10 bg-primary/5 gpu-accelerated"
         >
           <Swords className="h-6 w-6 text-primary/40" />
         </motion.div>
         <motion.div
-          animate={{ y: [0, 12, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute right-[12%] top-[30%] flex h-10 w-10 items-center justify-center rounded-2xl border border-accent/10 bg-accent/5"
+          animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: [0.4, 0, 0.6, 1], delay: 1 }}
+          className="absolute right-[12%] top-[30%] flex h-10 w-10 items-center justify-center rounded-2xl border border-accent/10 bg-accent/5 gpu-accelerated"
         >
           <Shield className="h-5 w-5 text-accent/40" />
         </motion.div>
         <motion.div
-          animate={{ y: [0, -10, 0], rotate: [0, 8, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute left-[20%] bottom-[25%] flex h-10 w-10 items-center justify-center rounded-2xl border border-chart-3/10 bg-chart-3/5"
+          animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: [0.4, 0, 0.6, 1], delay: 2 }}
+          className="absolute left-[20%] bottom-[25%] flex h-10 w-10 items-center justify-center rounded-2xl border border-chart-3/10 bg-chart-3/5 gpu-accelerated"
         >
           <Star className="h-5 w-5 text-chart-3/40" />
         </motion.div>
@@ -77,14 +77,14 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2 text-sm font-bold uppercase tracking-wider text-primary neon-text"
           >
             <Zap className="h-4 w-4 animate-glow-pulse" />
@@ -93,9 +93,9 @@ export function HeroSection() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+          transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-balance text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-8xl"
         >
           Enter the{" "}
@@ -112,9 +112,9 @@ export function HeroSection() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.25, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground lg:text-xl"
         >
           Level up your manga game. Explore thousands of titles, track your reading quests, and discover your next obsession.
@@ -122,9 +122,9 @@ export function HeroSection() {
 
         {/* Search bar */}
         <motion.form
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           onSubmit={handleSearch}
           className="mx-auto mt-10 flex max-w-lg items-center gap-3"
         >
@@ -152,7 +152,7 @@ export function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Hot quests:</span>
