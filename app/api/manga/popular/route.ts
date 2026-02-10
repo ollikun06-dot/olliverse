@@ -1,0 +1,17 @@
+import { NextRequest, NextResponse } from "next/server"
+import { getPopularManga } from "@/lib/manga-api"
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl
+  const page = parseInt(searchParams.get("page") || "1", 10)
+  const limit = 20
+  const offset = (page - 1) * limit
+
+  try {
+    const data = await getPopularManga(limit, offset)
+    return NextResponse.json(data)
+  } catch (error) {
+    console.error("Popular error:", error)
+    return NextResponse.json({ error: "Failed to get popular manga" }, { status: 500 })
+  }
+}
