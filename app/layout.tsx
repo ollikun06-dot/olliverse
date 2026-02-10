@@ -1,6 +1,7 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Geist_Mono } from 'next/font/google'
+import { SWRProvider } from '@/components/swr-provider'
 
 import './globals.css'
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
+        <SWRProvider>{children}</SWRProvider>
       </body>
     </html>
   )

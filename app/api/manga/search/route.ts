@@ -14,7 +14,11 @@ export async function GET(request: NextRequest) {
 
   try {
     const data = await searchManga(query, limit, offset)
-    return NextResponse.json(data)
+    return NextResponse.json(data, {
+      headers: {
+        "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120",
+      },
+    })
   } catch (error) {
     console.error("Search error:", error)
     return NextResponse.json({ error: "Failed to search manga" }, { status: 500 })

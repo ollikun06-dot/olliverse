@@ -11,7 +11,11 @@ export async function GET(request: NextRequest) {
 
   try {
     const data = await getChapterPages(id)
-    return NextResponse.json(data)
+    return NextResponse.json(data, {
+      headers: {
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+      },
+    })
   } catch (error) {
     console.error("Read error:", error)
     return NextResponse.json({ error: "Failed to get chapter pages" }, { status: 500 })

@@ -100,7 +100,7 @@ export async function searchManga(query: string, limit = 20, offset = 0): Promis
   params.append("contentRating[]", "safe")
   params.append("contentRating[]", "suggestive")
   params.append("order[relevance]", "desc")
-  const res = await fetch(`${MANGADEX}/manga?${params}`)
+  const res = await fetch(`${MANGADEX}/manga?${params}`, { next: { revalidate: 60 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   return {
@@ -118,7 +118,7 @@ export async function getPopularManga(limit = 20, offset = 0): Promise<MangaSear
   params.append("contentRating[]", "safe")
   params.append("contentRating[]", "suggestive")
   params.append("order[followedCount]", "desc")
-  const res = await fetch(`${MANGADEX}/manga?${params}`)
+  const res = await fetch(`${MANGADEX}/manga?${params}`, { next: { revalidate: 60 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   return {
@@ -136,7 +136,7 @@ export async function getLatestUpdates(limit = 20, offset = 0): Promise<MangaSea
   params.append("contentRating[]", "safe")
   params.append("contentRating[]", "suggestive")
   params.append("order[latestUploadedChapter]", "desc")
-  const res = await fetch(`${MANGADEX}/manga?${params}`)
+  const res = await fetch(`${MANGADEX}/manga?${params}`, { next: { revalidate: 60 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   return {
@@ -154,7 +154,7 @@ export async function getRecentManga(limit = 20, offset = 0): Promise<MangaSearc
   params.append("contentRating[]", "safe")
   params.append("contentRating[]", "suggestive")
   params.append("order[createdAt]", "desc")
-  const res = await fetch(`${MANGADEX}/manga?${params}`)
+  const res = await fetch(`${MANGADEX}/manga?${params}`, { next: { revalidate: 60 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   return {
@@ -165,7 +165,7 @@ export async function getRecentManga(limit = 20, offset = 0): Promise<MangaSearc
 }
 
 export async function getMangaInfo(id: string): Promise<MangaInfo> {
-  const res = await fetch(`${MANGADEX}/manga/${id}?includes[]=cover_art&includes[]=author&includes[]=artist`)
+  const res = await fetch(`${MANGADEX}/manga/${id}?includes[]=cover_art&includes[]=author&includes[]=artist`, { next: { revalidate: 60 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   const manga = json.data
@@ -183,7 +183,7 @@ export async function getMangaInfo(id: string): Promise<MangaInfo> {
   chapParams.append("contentRating[]", "safe")
   chapParams.append("contentRating[]", "suggestive")
   chapParams.append("includes[]", "scanlation_group")
-  let chapRes = await fetch(`${MANGADEX}/chapter?${chapParams}`)
+  let chapRes = await fetch(`${MANGADEX}/chapter?${chapParams}`, { next: { revalidate: 60 } })
   let chapJson = chapRes.ok ? await chapRes.json() : { data: [] }
 
   // If no English chapters found, try without language filter
@@ -196,7 +196,7 @@ export async function getMangaInfo(id: string): Promise<MangaInfo> {
     fallbackParams.append("contentRating[]", "safe")
     fallbackParams.append("contentRating[]", "suggestive")
     fallbackParams.append("includes[]", "scanlation_group")
-    chapRes = await fetch(`${MANGADEX}/chapter?${fallbackParams}`)
+    chapRes = await fetch(`${MANGADEX}/chapter?${fallbackParams}`, { next: { revalidate: 60 } })
     chapJson = chapRes.ok ? await chapRes.json() : { data: [] }
   }
 
@@ -224,7 +224,7 @@ export async function getMangaInfo(id: string): Promise<MangaInfo> {
 }
 
 export async function getChapterPages(chapterId: string): Promise<ChapterPage[]> {
-  const res = await fetch(`${MANGADEX}/at-home/server/${chapterId}`)
+  const res = await fetch(`${MANGADEX}/at-home/server/${chapterId}`, { next: { revalidate: 300 } })
   if (!res.ok) throw new Error(`MangaDex API error: ${res.status}`)
   const json = await res.json()
   const baseUrl = json.baseUrl
